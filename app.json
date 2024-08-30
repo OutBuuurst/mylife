@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "myLife",
+    "slug": "myLife",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.outbuurst.myLife"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsVersion": "10.4.0",
+          "RNMapboxMapsDownloadToken": "sk.eyJ1Ijoib3V0YnVyc3Q5OSIsImEiOiJjbTBma2NjcHMwaWV1MmpzN20xYWpyZnhtIn0.bsUARO5-eDXmjXOmhjXU2A"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Show current location on map."
+        }
+      ],
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "52e829b5-a0fc-4ad8-b809-8ab8601ebedd"
+      }
+    }
+  }
+}
