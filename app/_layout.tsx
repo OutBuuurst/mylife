@@ -22,7 +22,6 @@ export default  function RootLayout() {
   const loadDataCallback = useCallback(async () => {
     try {
       const db = await getDBConnection();
-      console.error(db.dbname)
       const result = await createTables(db)
     } catch (error) {
       console.error("ERROOOOOR:");
@@ -54,6 +53,10 @@ export default  function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
           <Stack.Screen name="+not-found"/>
+          <Stack.Screen options={{headerTitle:"UI Settings"}} name={"uiSettings"} ></Stack.Screen>
+          <Stack.Screen options={{headerTitle:"Data Settings"}} name={"dataSettings"} ></Stack.Screen>
+          <Stack.Screen options={{headerTitle:"Security Settings"}} name={"securitySettings"} ></Stack.Screen>
+
         </Stack>
       </ThemeProvider>
   );

@@ -1,13 +1,8 @@
 import {Image, StyleSheet, Platform, View} from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import {MapView, } from "@rnmapbox/maps";
+import {MapView, MarkerView,} from "@rnmapbox/maps";
 import {useEffect} from "react";
 import Mapbox from "@rnmapbox/maps";
-import {getDBConnection} from "@/hooks/useDatabase";
+import {Icon} from "react-native-paper";
 
 export default function HomeScreen() {
 
@@ -20,7 +15,16 @@ export default function HomeScreen() {
   return (
       <View style={{flex:1, flexDirection:"column"}}>
 
-        <MapView  style={styles.map} projection={"globe"} ></MapView>
+        <MapView  style={styles.map} projection={"globe"} >
+
+          <MarkerView coordinate={[14.8234234,35.123124]}>
+
+            <Icon size={34} source={"pin"}>
+            </Icon>
+
+          </MarkerView>
+
+        </MapView>
       </View>
       );
 }

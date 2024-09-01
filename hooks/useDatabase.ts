@@ -90,7 +90,7 @@ export const createMemory = async (createdAt:string, updatedAt:string,content:st
         );
         // @ts-ignore
         const insertedId = result[0].insertId;
-        return new Memory(insertedId, createdAt, updatedAt, content, coordinates);
+        return new Memory(insertedId, createdAt, updatedAt, content, coordinates,  null);
     } catch (e) {
         console.error(e);
         throw e;
@@ -109,7 +109,8 @@ export const getMemoryById = async (id: number): Promise<Memory | null> => {
                 memoryData.createdAt,
                 memoryData.updatedAt,
                 memoryData.content,
-                memoryData.coordinates
+                memoryData.coordinates,
+                null
             );
         }
         return null;
@@ -132,7 +133,8 @@ export const getAllMemories = async (): Promise<Memory[]> => {
                 memoryData.createdAt,
                 memoryData.updatedAt,
                 memoryData.content,
-                memoryData.coordinates
+                memoryData.coordinates,
+                memoryData.contacts
             ));
         }
         return memories;

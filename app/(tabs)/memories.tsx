@@ -1,50 +1,37 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
-import {StyleSheet, Image, Platform, ScrollView, View, Text} from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button} from "react-native-paper";
-import {createContact, createMemory, getAllContacts, getAllMemories} from "@/hooks/useDatabase";
-import Contact from "@/models/contact";
+import {getAllMemories} from "@/hooks/useDatabase";
+import {useCallback, useEffect, useState} from "react";
+import MemoryComponent from "@/components/MemoryComponent";
+import Memory from "@/models/memory";
 
 export default function TabTwoScreen() {
 
 
+    const [memories, setMemories] = useState([new Memory(0,'','','','',null)]);
+
+
+    const loadDataCallback = useCallback(async () => {
+        try {
+            const result = await getAllMemories()
+            setMemories(prevState => ([...prevState, ...result]))
+
+        } catch (error) {
+            console.error("ERROOOOOR:");
+            console.error(error);
+        }
+    }, []);
+
+    useEffect( ()=>{
+
+     loadDataCallback()
+
+    },[])
 
   return (
-    <View >
-      <Button style={{marginTop:50}} children={<Text>Press me!</Text>} onPress={async () => {
-        await createMemory(Date.now().toString(), Date.now().toString(), '{text:"Hi"}', "5.343434,6.8234");
-
-        console.log('memory created');
-      }}></Button>
-
-      <Button style={{marginTop:50}} children={<Text>Press me!</Text>} onPress={async () => {
-      const mems =  await getAllMemories();
-        console.log(mems);
-
-        console.log('memory fetched');
-      }}></Button>
-
-
-      <Button style={{marginTop:50}} children={<Text>Press me!</Text>} onPress={async () => {
-        const mems =  await createContact(new Contact(1,"haythem","drihmi","20574210","drihmihaythem@gmail.com",null,null,null,null,null,null,null,null));
-        console.log(mems);
-
-        console.log('memory fetched');
-      }}></Button>
-
-
-      <Button style={{marginTop:50}} children={<Text>Press me!</Text>} onPress={async () => {
-const conts = await getAllContacts();
-console.log(conts);
-
-        console.log('memory fetched');
-      }}></Button>
-      </View>
+    <ScrollView  >
+        {memories.map((e)=><MemoryComponent key={Math.random()} content={e.content} id={e.id} coordinates={e.coordinates} createdAt={e.createdAt} updatedAt={e.updatedAt} contacts={null}></MemoryComponent>)}
+      </ScrollView>
   );
 }
 
